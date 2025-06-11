@@ -1,0 +1,296 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "close": "Close",
+    "search": "Search",
+    "select": "Select",
+    "required": "Required",
+    "optional": "Optional",
+    "backToHome": "Back to Home"
+  },
+  "app": {
+    "title": "BarberBook",
+    "subtitle": "Book your appointment with ease"
+  },
+  "booking": {
+    "title": "Book an Appointment",
+    "form": {
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Enter your full name",
+      "phoneNumber": "Phone Number",
+      "phonePlaceholder": "123456789",
+      "service": "Service",
+      "servicePlaceholder": "Select a service",
+      "date": "Date",
+      "time": "Time",
+      "timePlaceholder": "Select a time",
+      "submit": "Book Appointment",
+      "submitting": "Booking..."
+    },
+    "services": {
+      "haircut": "Haircut",
+      "beard": "Beard Trim",
+      "both": "Haircut + Beard"
+    },
+    "timeSlots": {
+      "loading": "Loading available times...",
+      "noSlots": "No available times for this date",
+      "selectDate": "Please select a date first"
+    },
+    "messages": {
+      "success": "Appointment booked successfully! We will contact you soon to confirm.",
+      "error": "Failed to book appointment. Please try again.",
+      "networkError": "Network error. Please check your connection and try again."
+    }
+  },
+  "admin": {
+    "title": "Admin Dashboard",
+    "subtitle": "Manage appointments and bookings",
+    "logout": "Logout",
+    "apiDocumentation": "API Documentation",
+    "refresh": "Refresh",
+    "refreshing": "Refreshing...",
+    "viewModes": {
+      "table": "Table View",
+      "calendar": "Calendar View"
+    },
+    "filters": {
+      "title": "Filter Appointments",
+      "status": {
+        "label": "Filter by Status",
+        "all": "All Statuses",
+        "pending": "Pending",
+        "confirmed": "Confirmed",
+        "cancelled": "Cancelled"
+      },
+      "date": {
+        "label": "Filter by Date",
+        "all": "All Dates",
+        "today": "Today",
+        "selected": "Selected Date",
+        "selectDate": "Select Date"
+      }
+    },
+    "stats": {
+      "total": "Total Appointments",
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "cancelled": "Cancelled"
+    },
+    "appointmentsTable": {
+      "title": "Recent Appointments",
+      "noAppointments": "No appointments found",
+      "showing": "Showing {filtered} of {total} appointments",
+      "headers": {
+        "customer": "Customer",
+        "service": "Service",
+        "dateTime": "Date & Time",
+        "status": "Status",
+        "created": "Created",
+        "actions": "Actions"
+      }
+    },
+    "status": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "cancelled": "Cancelled"
+    },
+    "actions": {
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "reactivate": "Reactivate"
+    },
+    "deleteDialog": {
+      "title": "Delete Appointment",
+      "message": "Are you sure you want to delete the appointment for {name}? This action cannot be undone.",
+      "confirm": "Delete",
+      "cancel": "Cancel"
+    },
+    "errors": {
+      "fetchError": "Failed to fetch appointments",
+      "updateError": "Failed to update appointment",
+      "deleteError": "Failed to delete appointment",
+      "networkError": "Network error. Please try again."
+    }
+  },
+  "calendar": {
+    "viewModes": {
+      "month": "Month",
+      "week": "Week"
+    },
+    "navigation": {
+      "previous": "Previous",
+      "next": "Next",
+      "today": "Today"
+    },
+    "months": {
+      "january": "January",
+      "february": "February",
+      "march": "March",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "july": "July",
+      "august": "August",
+      "september": "September",
+      "october": "October",
+      "november": "November",
+      "december": "December"
+    },
+    "days": {
+      "sunday": "Sun",
+      "monday": "Mon",
+      "tuesday": "Tue",
+      "wednesday": "Wed",
+      "thursday": "Thu",
+      "friday": "Fri",
+      "saturday": "Sat"
+    }
+  },
+  "appointmentDetails": {
+    "title": "Appointment Details",
+    "subtitle": "Barber Booking",
+    "customer": "Customer",
+    "phone": "Phone",
+    "service": "Service",
+    "date": "Date",
+    "time": "Time",
+    "status": "Status",
+    "notes": "Notes",
+    "actions": {
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "delete": "Delete Appointment"
+    }
+  },
+  "deleteDialog": {
+    "title": "Delete Appointment",
+    "message": "Are you sure you want to delete the appointment for {name}?",
+    "warning": "This action cannot be undone.",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "login": {
+    "title": "Admin Login",
+    "subtitle": "Sign in to manage appointments",
+    "form": {
+      "username": "Username",
+      "usernamePlaceholder": "Enter your username",
+      "password": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "signIn": "Sign In",
+      "signingIn": "Signing in..."
+    },
+    "errors": {
+      "invalidCredentials": "Invalid username or password",
+      "networkError": "Network error. Please try again."
+    }
+  },
+  "countryInput": {
+    "searchPlaceholder": "Search countries...",
+    "noResults": "No countries found"
+  },
+  "countries": {
+    "ES": "Spain",
+    "FR": "France",
+    "GB": "United Kingdom",
+    "DE": "Germany",
+    "IT": "Italy",
+    "PT": "Portugal",
+    "NL": "Netherlands",
+    "BE": "Belgium",
+    "CH": "Switzerland",
+    "AT": "Austria",
+    "SE": "Sweden",
+    "NO": "Norway",
+    "DK": "Denmark",
+    "FI": "Finland",
+    "PL": "Poland",
+    "CZ": "Czech Republic",
+    "HU": "Hungary",
+    "GR": "Greece",
+    "IE": "Ireland",
+    "RO": "Romania",
+    "HR": "Croatia",
+    "BG": "Bulgaria",
+    "SK": "Slovakia",
+    "SI": "Slovenia",
+    "LT": "Lithuania",
+    "LV": "Latvia",
+    "EE": "Estonia",
+    "US": "United States",
+    "CA": "Canada",
+    "MX": "Mexico",
+    "BR": "Brazil",
+    "AR": "Argentina",
+    "CL": "Chile",
+    "CO": "Colombia",
+    "PE": "Peru",
+    "VE": "Venezuela",
+    "EC": "Ecuador",
+    "UY": "Uruguay",
+    "PY": "Paraguay",
+    "BO": "Bolivia",
+    "CN": "China",
+    "JP": "Japan",
+    "KR": "South Korea",
+    "IN": "India",
+    "ID": "Indonesia",
+    "TH": "Thailand",
+    "VN": "Vietnam",
+    "PH": "Philippines",
+    "MY": "Malaysia",
+    "SG": "Singapore",
+    "HK": "Hong Kong",
+    "TW": "Taiwan",
+    "AE": "United Arab Emirates",
+    "SA": "Saudi Arabia",
+    "IL": "Israel",
+    "TR": "Turkey",
+    "PK": "Pakistan",
+    "BD": "Bangladesh",
+    "LK": "Sri Lanka",
+    "ZA": "South Africa",
+    "NG": "Nigeria",
+    "EG": "Egypt",
+    "KE": "Kenya",
+    "GH": "Ghana",
+    "MA": "Morocco",
+    "TN": "Tunisia",
+    "DZ": "Algeria",
+    "ET": "Ethiopia",
+    "UG": "Uganda",
+    "AU": "Australia",
+    "NZ": "New Zealand",
+    "IR": "Iran",
+    "IQ": "Iraq",
+    "JO": "Jordan",
+    "LB": "Lebanon",
+    "SY": "Syria",
+    "KW": "Kuwait",
+    "QA": "Qatar",
+    "BH": "Bahrain",
+    "OM": "Oman",
+    "RU": "Russia",
+    "UA": "Ukraine",
+    "BY": "Belarus",
+    "KZ": "Kazakhstan"
+  },
+  "languageSwitcher": {
+    "title": "Language",
+    "languages": {
+      "en": "English",
+      "es": "Español",
+      "ar": "العربية",
+      "fr": "Français"
+    }
+  }
+}

@@ -1,0 +1,64 @@
+@import 'tailwindcss';
+
+/* Custom Swagger UI Styling */
+.swagger-container .swagger-ui {
+  font-family: inherit;
+}
+
+.swagger-container .swagger-ui .topbar {
+  display: none;
+}
+
+.swagger-container .swagger-ui .info {
+  margin: 20px 0;
+}
+
+.swagger-container .swagger-ui .info .title {
+  color: #1f2937;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.swagger-container .swagger-ui .scheme-container {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.swagger-container .swagger-ui .opblock {
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.swagger-container .swagger-ui .opblock.opblock-post {
+  border-color: #10b981;
+}
+
+.swagger-container .swagger-ui .opblock.opblock-get {
+  border-color: #3b82f6;
+}
+
+.swagger-container .swagger-ui .opblock.opblock-patch {
+  border-color: #f59e0b;
+}
+
+.swagger-container .swagger-ui .opblock.opblock-delete {
+  border-color: #ef4444;
+}
+
+.swagger-container .swagger-ui .opblock-summary {
+  border-radius: 8px 8px 0 0;
+}
+
+.swagger-container .swagger-ui .btn.authorize {
+  background: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.swagger-container .swagger-ui .btn.authorize:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+}

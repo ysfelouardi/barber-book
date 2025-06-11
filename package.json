@@ -1,0 +1,50 @@
+{
+  "name": "barber-citas",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@hookform/resolvers": "^5.1.1",
+    "autoprefixer": "^10.4.21",
+    "firebase": "^11.9.1",
+    "next": "^14.2.14",
+    "next-intl": "^4.1.0",
+    "postcss": "^8.5.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.57.0",
+    "tailwindcss": "^4.1.9",
+    "zod": "^3.25.61"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.9",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.7.8",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/swagger-ui-react": "^5.18.0",
+    "eslint": "^9.28.0",
+    "husky": "^9.1.7",
+    "jest": "^29.7.0",
+    "lint-staged": "^15.5.2",
+    "prettier": "^3.5.3",
+    "swagger-ui-react": "^5.24.1",
+    "ts-jest": "^29.3.4",
+    "typescript": "^5.6.3"
+  }
+}
