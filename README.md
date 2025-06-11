@@ -47,10 +47,10 @@ A modern, multilingual barber appointment booking system built with Next.js, Typ
 
 ### Prerequisites
 
-- Node.js 18.x or higher
-- npm or yarn package manager
-- Firebase account
-- Git
+- **Node.js**: 18.x or higher
+- **Package Manager**: npm (included with Node.js)
+- **Firebase Account**: For database and authentication
+- **Git**: For version control
 
 ### Installation
 
@@ -65,8 +65,6 @@ A modern, multilingual barber appointment booking system built with Next.js, Typ
 
    ```bash
    npm install
-   # or
-   yarn install
    ```
 
 3. **Set up environment variables**
@@ -81,8 +79,6 @@ A modern, multilingual barber appointment booking system built with Next.js, Typ
 
    ```bash
    npm run dev
-   # or
-   yarn dev
    ```
 
 5. **Open your browser**
@@ -297,22 +293,28 @@ barber-citas/
 │   │   └── swagger/       # OpenAPI specification
 │   └── globals.css        # Global styles
 ├── components/             # Reusable components
-│   ├── CountryPhoneInput.tsx
-│   ├── SimpleLanguageSwitcher.tsx
-│   ├── EnhancedCalendar.tsx
-│   ├── AppointmentDetailsPopup.tsx
-│   └── ConfirmDialog.tsx
+│   ├── CountryPhoneInput.tsx      # Phone input with country selection
+│   ├── SimpleLanguageSwitcher.tsx # Language switcher component
+│   ├── EnhancedCalendar.tsx       # Admin calendar view
+│   ├── AppointmentDetailsPopup.tsx # Admin appointment details modal
+│   └── ConfirmDialog.tsx          # Delete confirmation dialog
 ├── lib/                   # Utilities and configurations
 │   ├── firebase.ts        # Firebase configuration
+│   ├── firestore.ts       # Firestore database utilities
 │   ├── translations.ts    # Translation system
-│   └── validation.ts      # Form validation schemas
+│   ├── validation.ts      # Form validation schemas
+│   └── avatarUtils.ts     # Avatar generation utilities
 ├── lang/                  # Translation files
 │   ├── en.json           # English translations
 │   ├── es.json           # Spanish translations
 │   ├── ar.json           # Arabic translations
 │   └── fr.json           # French translations
 ├── hooks/                 # Custom React hooks
-└── types/                 # TypeScript type definitions
+│   └── useTranslations.tsx # Translation hook
+├── scripts/              # Build and utility scripts
+├── i18n.ts               # Internationalization configuration
+├── middleware.ts         # Next.js middleware for i18n routing
+└── jest.config.ts        # Jest testing configuration
 ```
 
 ### Available Scripts
@@ -323,28 +325,54 @@ npm run dev          # Start development server
 npm run build        # Build for production
 npm run start        # Start production server
 npm run lint         # Run ESLint
-npm run type-check   # Run TypeScript check
 
-# Database
-npm run db:seed      # Seed database with sample data (if implemented)
-npm run db:reset     # Reset database (if implemented)
+# Testing
+npm run test         # Run Jest tests
+npm run test:watch   # Run tests in watch mode
+
+# Code Formatting
+npm run format       # Format code with Prettier
 ```
 
 ### Adding New Languages
 
 1. **Create translation file**: `lang/[locale].json`
-2. **Update translations configuration**: `lib/translations.ts`
-3. **Add to language switcher**: Update supported locales
-4. **Test RTL support**: For right-to-left languages
+2. **Update i18n configuration**: Add locale to `i18n.ts`
+3. **Update middleware**: Ensure routing supports new locale
+4. **Add to language switcher**: Update `SimpleLanguageSwitcher.tsx`
+5. **Test RTL support**: For right-to-left languages, add `dir` attribute logic
 
 Example translation file structure:
 
 ```json
 {
-  "common": { "loading": "Loading..." },
-  "booking": { "title": "Book Appointment" },
-  "admin": { "title": "Admin Dashboard" },
-  "countries": { "US": "United States" }
+  "common": {
+    "loading": "Loading...",
+    "submit": "Submit",
+    "cancel": "Cancel"
+  },
+  "booking": {
+    "title": "Book Appointment",
+    "name": "Full Name",
+    "phone": "Phone Number",
+    "service": "Service",
+    "date": "Date",
+    "time": "Time"
+  },
+  "admin": {
+    "title": "Admin Dashboard",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "countries": {
+    "US": "United States",
+    "ES": "Spain",
+    "FR": "France"
+  },
+  "countryInput": {
+    "search": "Search countries...",
+    "noResults": "No countries found"
+  }
 }
 ```
 
@@ -414,6 +442,20 @@ service cloud.firestore {
 
 ## 🧪 Testing
 
+### Automated Testing
+
+The project includes Jest configuration for unit testing:
+
+```bash
+# Run all tests
+npm run test
+
+# Run tests in watch mode
+npm run test:watch
+```
+
+Test files should be placed in `__tests__/` directories or named with `.test.ts` or `.spec.ts` extensions.
+
 ### Manual Testing Checklist
 
 #### Booking Flow
@@ -461,7 +503,10 @@ rm -rf .next
 npm run build
 
 # Check TypeScript errors
-npm run type-check
+npx tsc --noEmit
+
+# Run linting
+npm run lint
 ```
 
 **Styling Issues**
