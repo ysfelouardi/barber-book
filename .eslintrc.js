@@ -1,4 +1,7 @@
 module.exports = {
-  extends: ['next', 'prettier'],
-  plugins: ['@typescript-eslint', 'react-hooks'],
+  extends: ['next/core-web-vitals'],
+  rules: {
+    '@typescript-eslint/no-unused-vars': 'warn',
+    'prefer-const': 'error',
+  },
 }
