@@ -15,12 +15,17 @@ import { db } from './firebase'
 export interface Appointment {
   id?: string
   name: string
+  email?: string // Optional for backward compatibility
   phone: string
   service: 'haircut' | 'beard' | 'both'
   date: string
   time: string
   status: 'pending' | 'confirmed' | 'cancelled'
   createdAt: Timestamp
+  // Customer authentication data
+  customerId?: string | null // Firebase Auth UID
+  customerEmail?: string | null // Customer's email
+  customerPhone?: string | null // Customer's verified phone
 }
 
 export interface TimeSlot {
@@ -108,6 +113,23 @@ export async function getAvailableSlots(date: string): Promise<string[]> {
     '17:00',
   ]
 
+  // Check if the selected date is today
+  const today = new Date()
+  const selectedDate = new Date(date)
+  const isToday = selectedDate.toDateString() === today.toDateString()
+
+  // If it's today, filter out past time slots
+  let availableSlots = defaultSlots
+  if (isToday) {
+    const currentTime = today.getHours() * 60 + today.getMinutes() // Current time in minutes
+    availableSlots = defaultSlots.filter((slot) => {
+      const [hours, minutes] = slot.split(':').map(Number)
+      const slotTimeInMinutes = hours * 60 + minutes
+      // Add 30 minutes buffer to current time to allow some preparation time
+      return slotTimeInMinutes > currentTime + 30
+    })
+  }
+
   // Get booked appointments for this date
   const q = query(
     appointmentsCollection,
@@ -117,6 +139,6 @@ export async function getAvailableSlots(date: string): Promise<string[]> {
   const querySnapshot = await getDocs(q)
   const bookedSlots = querySnapshot.docs.map((doc) => doc.data().time)
 
-  // Return available slots (not booked)
-  return defaultSlots.filter((slot) => !bookedSlots.includes(slot))
+  // Return available slots (not booked and not in the past if today)
+  return availableSlots.filter((slot) => !bookedSlots.includes(slot))
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import { useTranslations } from '@/hooks/useTranslations'
 
 interface Country {
@@ -132,17 +132,38 @@ export default function CountryPhoneInput({
   const [phoneNumber, setPhoneNumber] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
 
-  // Create countries array with translated names
-  const countries: Country[] = countryData.map((country) => ({
-    ...country,
-    name: t(`countries.${country.code}`),
-  }))
+  // Create countries array with translated names - memoized to prevent re-creation
+  const countries: Country[] = useMemo(
+    () =>
+      countryData.map((country) => ({
+        ...country,
+        name: t(`countries.${country.code}`),
+      })),
+    [t]
+  )
 
-  const [selectedCountry, setSelectedCountry] = useState<Country>(countries[0]) // Default to Spain
+  // Initialize selected country - default to Spain (ES)
+  const [selectedCountry, setSelectedCountry] = useState<Country>(() => {
+    const defaultCountry = countryData.find((c) => c.code === 'ES') || countryData[0]
+    return {
+      ...defaultCountry,
+      name: 'Spain', // Default name, will be updated when countries array is ready
+    }
+  })
 
-  // Parse initial value to extract country code and phone number
+  // Update selected country name when translations are ready
   useEffect(() => {
-    if (value) {
+    if (countries.length > 0) {
+      setSelectedCountry((prev) => {
+        const updatedCountry = countries.find((c) => c.code === prev.code)
+        return updatedCountry || countries[0]
+      })
+    }
+  }, [countries])
+
+  // Parse initial value to extract country code and phone number - run only once on mount or when value changes
+  useEffect(() => {
+    if (value && countries.length > 0) {
       const country = countries.find((c) => value.startsWith(c.prefix))
       if (country) {
         setSelectedCountry(country)
@@ -150,32 +171,44 @@ export default function CountryPhoneInput({
       } else {
         setPhoneNumber(value)
       }
+    } else if (!value) {
+      setPhoneNumber('')
     }
-  }, [value, countries])
+  }, [value]) // Remove countries dependency to prevent infinite loop
 
-  const handleCountrySelect = (country: Country) => {
-    setSelectedCountry(country)
-    setIsDropdownOpen(false)
-    setSearchTerm('')
-    // Update the full phone number
-    onChange(country.prefix + phoneNumber)
-  }
-
-  // Filter countries based on search term
-  const filteredCountries = countries.filter(
-    (country) =>
-      country.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      country.prefix.includes(searchTerm)
+  const handleCountrySelect = useCallback(
+    (country: Country) => {
+      setSelectedCountry(country)
+      setIsDropdownOpen(false)
+      setSearchTerm('')
+      // Update the full phone number
+      onChange(country.prefix + phoneNumber)
+    },
+    [phoneNumber, onChange]
   )
 
-  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newPhoneNumber = e.target.value
-    setPhoneNumber(newPhoneNumber)
-    // Update the full phone number with country prefix
-    onChange(selectedCountry.prefix + newPhoneNumber)
-  }
+  // Filter countries based on search term
+  const filteredCountries = useMemo(
+    () =>
+      countries.filter(
+        (country) =>
+          country.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          country.prefix.includes(searchTerm)
+      ),
+    [countries, searchTerm]
+  )
 
-  const defaultPlaceholder = t('booking.form.phonePlaceholder')
+  const handlePhoneNumberChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newPhoneNumber = e.target.value
+      setPhoneNumber(newPhoneNumber)
+      // Update the full phone number with country prefix
+      onChange(selectedCountry.prefix + newPhoneNumber)
+    },
+    [selectedCountry.prefix, onChange]
+  )
+
+  const defaultPlaceholder = useMemo(() => t('booking.form.phonePlaceholder'), [t])
 
   return (
     <div className="relative">

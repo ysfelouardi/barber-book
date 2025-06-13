@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google'
 import type { Metadata } from 'next'
 import { locales } from '../../i18n'
+import { AuthProvider } from '@/contexts/AuthContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,7 +26,13 @@ export default function LocaleLayout({
 }) {
   return (
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
-      <body className={inter.className}>{children}</body>
+      <head>
+        {/* Add reCAPTCHA script for phone verification */}
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+      </head>
+      <body className={inter.className}>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   )
 }

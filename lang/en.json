@@ -24,6 +24,8 @@
     "form": {
       "fullName": "Full Name",
       "fullNamePlaceholder": "Enter your full name",
+      "email": "Email Address",
+      "emailPlaceholder": "Enter your email address",
       "phoneNumber": "Phone Number",
       "phonePlaceholder": "123456789",
       "service": "Service",
@@ -42,13 +44,16 @@
     "timeSlots": {
       "loading": "Loading available times...",
       "noSlots": "No available times for this date",
-      "selectDate": "Please select a date first"
+      "selectDate": "Please select a date first",
+      "pastSlotsFiltered": "Past time slots are hidden for today"
     },
     "messages": {
       "success": "Appointment booked successfully! We will contact you soon to confirm.",
       "error": "Failed to book appointment. Please try again.",
       "networkError": "Network error. Please check your connection and try again."
-    }
+    },
+    "signInForBenefits": "Sign in to save your booking history and get faster checkouts!",
+    "welcomeBack": "Welcome back!"
   },
   "admin": {
     "title": "Admin Dashboard",
@@ -193,6 +198,44 @@
       "invalidCredentials": "Invalid username or password",
       "networkError": "Network error. Please try again."
     }
+  },
+  "auth": {
+    "signInOrSignUp": "Sign In or Sign Up",
+    "signInWithGoogle": "Sign in with Google",
+    "googleLogin": "Google",
+    "phoneLogin": "Phone",
+    "verifyPhone": "Verify Phone Number",
+    "phoneVerificationDescription": "We'll send you a verification code to confirm your phone number.",
+    "phoneNumber": "Phone Number",
+    "phoneNumberPlaceholder": "Enter your phone number",
+    "sendCode": "Send Code",
+    "sendingCode": "Sending...",
+    "verificationCode": "Verification Code",
+    "enterVerificationCode": "Enter Verification Code",
+    "codeSentTo": "Code sent to",
+    "verify": "Verify",
+    "verifying": "Verifying...",
+    "resendCode": "Resend Code",
+    "resendCodeIn": "Resend in",
+    "changePhoneNumber": "Change Phone Number",
+    "termsAndPrivacy": "By continuing, you agree to our Terms of Service and Privacy Policy.",
+    "signInRequired": "Sign in required",
+    "signInForPersonalizedExperience": "Please sign in to book an appointment and enjoy personalized features",
+    "signOut": "Sign Out",
+    "errors": {
+      "googleSignIn": "Failed to sign in with Google",
+      "phoneRequired": "Please enter a phone number",
+      "sendCode": "Failed to send verification code",
+      "codeRequired": "Please enter the verification code",
+      "invalidCode": "Invalid verification code"
+    }
+  },
+  "profile": {
+    "welcome": "Welcome",
+    "welcomeBack": "Welcome back!",
+    "user": "User",
+    "avatar": "Profile picture",
+    "loading": "Loading profile..."
   },
   "countryInput": {
     "searchPlaceholder": "Search countries...",

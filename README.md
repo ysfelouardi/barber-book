@@ -43,6 +43,24 @@ A modern, multilingual barber appointment booking system built with Next.js, Typ
 - **Authentication Support**: Documented admin endpoints with security requirements
 - **Easy Access**: Direct link from admin dashboard
 
+## 🌟 Key Features
+
+### Customer Authentication
+
+- **Google OAuth** - Sign in with Google account
+- **Phone Verification** - SMS-based phone number verification with reCAPTCHA
+- **User Profiles** - Automatic profile creation and management in Firestore
+- **Persistent Sessions** - Stay signed in across browser sessions
+- **Form Pre-filling** - Automatically fill booking forms with user profile data
+
+### Smart Booking System
+
+- **Real-time Availability** - Dynamic time slot availability checking
+- **Smart Time Filtering** - Past time slots are automatically hidden when booking for today
+- **Multi-language Support** - Arabic and English localization
+- **Responsive Design** - Works perfectly on desktop and mobile devices
+- **Form Validation** - Comprehensive client and server-side validation
+
 ## 🚀 Quick Start
 
 ### Prerequisites

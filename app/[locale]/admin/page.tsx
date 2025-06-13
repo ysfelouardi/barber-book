@@ -230,15 +230,43 @@ export default function AdminPage() {
   }
 
   const formatDateTime = (timestamp: any) => {
-    // Handle Firestore Timestamp or string
-    const date = timestamp?.toDate ? timestamp.toDate() : new Date(timestamp)
-    return date.toLocaleString(locale, {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    })
+    try {
+      // Handle null/undefined timestamps
+      if (!timestamp) {
+        return 'N/A'
+      }
+
+      // Handle Firestore Timestamp
+      if (timestamp?.toDate && typeof timestamp.toDate === 'function') {
+        const date = timestamp.toDate()
+        return date.toLocaleString(locale, {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+        })
+      }
+
+      // Handle string or number timestamps
+      const date = new Date(timestamp)
+
+      // Check if date is valid
+      if (isNaN(date.getTime())) {
+        return 'N/A'
+      }
+
+      return date.toLocaleString(locale, {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+    } catch (error) {
+      console.error('Error formatting timestamp:', error, timestamp)
+      return 'N/A'
+    }
   }
 
   if (isLoading) {
@@ -496,6 +524,9 @@ export default function AdminPage() {
                               <div className="text-sm font-medium text-gray-900">
                                 {appointment.name}
                               </div>
+                              {appointment.email && (
+                                <div className="text-sm text-gray-500">{appointment.email}</div>
+                              )}
                               <div className="text-sm text-gray-500">{appointment.phone}</div>
                             </div>
                           </td>
@@ -600,9 +631,21 @@ export default function AdminPage() {
           appointment={selectedAppointment}
           isOpen={isAppointmentPopupOpen}
           onClose={closeAppointmentPopup}
-          onConfirm={(id) => updateAppointmentStatus(id, 'confirmed')}
-          onCancel={(id) => updateAppointmentStatus(id, 'cancelled')}
-          onDelete={handleAppointmentDelete}
+          onConfirm={async (id) => {
+            await updateAppointmentStatus(id, 'confirmed')
+            closeAppointmentPopup()
+            fetchAppointments()
+          }}
+          onCancel={async (id) => {
+            await updateAppointmentStatus(id, 'cancelled')
+            closeAppointmentPopup()
+            fetchAppointments()
+          }}
+          onDelete={async (id) => {
+            await handleAppointmentDelete(id)
+            closeAppointmentPopup()
+            fetchAppointments()
+          }}
           isUpdating={isUpdating}
         />
       )}

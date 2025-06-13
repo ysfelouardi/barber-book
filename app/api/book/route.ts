@@ -26,10 +26,19 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Create the appointment with pending status
+    // Create the appointment with pending status and customer data
     const appointmentId = await createAppointment({
-      ...validatedData,
+      name: validatedData.name,
+      email: validatedData.email,
+      phone: validatedData.phone,
+      service: validatedData.service,
+      date: validatedData.date,
+      time: validatedData.time,
       status: 'pending',
+      // Customer authentication data
+      customerId: validatedData.userId || null,
+      customerEmail: validatedData.userEmail || null,
+      customerPhone: validatedData.userPhone || null,
     })
 
     return NextResponse.json(

@@ -9,7 +9,10 @@ import { getAvailableSlots } from '@/lib/firestore'
  */
 export async function GET(request: NextRequest) {
   try {
+    console.log('GET /api/slots called with URL:', request.nextUrl.toString())
+
     const date = request.nextUrl.searchParams.get('date')
+    console.log('Date parameter:', date)
 
     if (!date) {
       return NextResponse.json({ error: 'Date parameter is required' }, { status: 400 })
@@ -17,6 +20,7 @@ export async function GET(request: NextRequest) {
 
     // Validate date format
     const validatedData = getSlotsSchema.parse({ date })
+    console.log('Validated date:', validatedData.date)
 
     // Check if date is not in the past
     const selectedDate = new Date(validatedData.date)
@@ -27,8 +31,10 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Cannot get slots for past dates' }, { status: 400 })
     }
 
+    console.log('Calling getAvailableSlots...')
     // Get available slots
     const availableSlots = await getAvailableSlots(validatedData.date)
+    console.log('Available slots:', availableSlots)
 
     const response = NextResponse.json(
       {
@@ -45,6 +51,11 @@ export async function GET(request: NextRequest) {
     return response
   } catch (error) {
     console.error('Error getting available slots:', error)
+    console.error('Error details:', {
+      name: error instanceof Error ? error.name : 'Unknown',
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    })
 
     // Handle validation errors
     if (error instanceof Error && error.name === 'ZodError') {
@@ -54,6 +65,18 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    return NextResponse.json({ error: 'Failed to get available slots' }, { status: 500 })
+    // Return more detailed error in development
+    const isDevelopment = process.env.NODE_ENV === 'development'
+    return NextResponse.json(
+      {
+        error: 'Failed to get available slots',
+        ...(isDevelopment &&
+          error instanceof Error && {
+            details: error.message,
+            stack: error.stack,
+          }),
+      },
+      { status: 500 }
+    )
   }
 }
